@@ -16,6 +16,7 @@ public class CharacterManager : MonoBehaviour
     public bool canClimb;
     public bool facingRight;
     public bool isLedgeHanging;
+    public bool isUpsideDown;
 
     [Header("Grounded Detection")]
     public float groundDetectionDistance;
@@ -46,9 +47,9 @@ public class CharacterManager : MonoBehaviour
         facingRight = HandleDirection();
 
         // check to see if the character fell off the map
-        if (isFalling && this.transform.position.y <= -2f)
+        //if (isFalling && this.transform.position.y <= -2f)
         {
-            isDead = true;
+            //isDead = true;
         }
 
         // update animator variables
@@ -84,8 +85,11 @@ public class CharacterManager : MonoBehaviour
     #region Grounded And Falling Detection
     private bool HandleGroundedDetection(float delta)
     {
+        Vector3 fallDirection = Vector3.down;
+        if (isUpsideDown) { fallDirection = Vector3.up; }
+
         // check to see if character is on the ground
-        if (!Physics2D.BoxCast(groundDetectionCastTransform.position + (Vector3.down * groundDetectionDistance), new Vector3(this.GetComponent<BoxCollider2D>().size.x - .01f, 0.01f, 0f), 0f, Vector2.down, 0.01f, groundLayer)) { return false; }
+        if (!Physics2D.BoxCast(groundDetectionCastTransform.position + (fallDirection * groundDetectionDistance), new Vector3(this.GetComponent<BoxCollider2D>().size.x - .01f, 0.01f, 0f), 0f, fallDirection, 0.01f, groundLayer)) { return false; }
         else
         {
             // make sure character has the right rigidbody type

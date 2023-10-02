@@ -39,6 +39,8 @@ public class PlayerLocomotion : MonoBehaviour
             return;
         }
 
+        if (playerManager.isUpsideDown) { horizontal *= -1f; }
+        //Debug.Log(horizontal);
         playerManager.body.velocity = new Vector2(horizontal * moveSpeed, playerManager.body.velocity.y);
         if (playerManager.isSneaking)
         {
@@ -51,7 +53,16 @@ public class PlayerLocomotion : MonoBehaviour
         if (playerManager.isDead || playerManager.isLedgeHanging || playerManager.isInteracting) { return; }
 
         playerManager.PlayJumpAnimation();
-        float jumpForce = Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * playerManager.body.gravityScale));// * 2f));
+        float jumpForce;
+        if (playerManager.isUpsideDown)
+        {
+            jumpForce = -1f * Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * -playerManager.body.gravityScale));// * 2f));
+        }
+        else
+        {
+            jumpForce = Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * playerManager.body.gravityScale));// * 2f));
+        }
+        
         playerManager.body.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 }

@@ -11,6 +11,8 @@ public class PlayerManager : CharacterManager
     public bool isSneaking;
     public bool canCombo;
 
+    public Interactable nearestInteractable;
+
     //public PlayerInventory playerInventory;
 
     protected override void Awake()
@@ -30,12 +32,15 @@ public class PlayerManager : CharacterManager
 
         ledgeGrab.SetDirection(facingRight);
 
+        CheckForInteractables();
+
         base.Update();
     }
     private void LateUpdate()
     {
         // reset all the input values
         inputManager.jumpInput = false;
+        inputManager.interactInput = false;
     }
 
     public void HandleAnimator(float movement)
@@ -137,5 +142,28 @@ public class PlayerManager : CharacterManager
         //animator.SetBool("Climb Up", false);
         //animator.SetBool("Wall Hang", false);
         ledgeGrab.Drop();
+    }
+    public void HandleInteract()
+    {
+        if(nearestInteractable == null || Vector2.Distance(this.transform.position, nearestInteractable.transform.position) > nearestInteractable.interactRange) { return; }
+
+        // trigger the interaction
+        nearestInteractable.Interact();
+    }
+
+    public void CheckForInteractables()
+    {
+        foreach(Interactable interactable in FindObjectsOfType<Interactable>())
+        {
+            if(nearestInteractable == null || Vector2.Distance(this.transform.position, interactable.transform.position) <= Vector2.Distance(this.transform.position, nearestInteractable.transform.position))
+            {
+                nearestInteractable = interactable;
+            }
+        }
+
+        if (nearestInteractable == null || Vector2.Distance(this.transform.position, nearestInteractable.transform.position) > nearestInteractable.interactRange) { return; }
+
+        // display interact message
+        //Debug.Log(nearestInteractable.interactMessage);
     }
 }
