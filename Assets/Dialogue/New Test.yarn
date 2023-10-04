@@ -1,0 +1,26 @@
+﻿title: Start
+position: -226,-73
+---
+Hello World
+->Option One
+    <<jump OptionOne>>
+->Option Two
+    <<jump OptionTwo>>
+===
+title: OptionOne
+position: 26,-166
+---
+Option One
+<<jump End>>
+===
+title: OptionTwo
+position: 31,-2
+---
+Option Two
+<<jump End>>
+===
+title: End
+position: 288,-79
+---
+Goodbye
+===

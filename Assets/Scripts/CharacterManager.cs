@@ -22,7 +22,7 @@ public class CharacterManager : MonoBehaviour
     public float groundDetectionDistance;
     public LayerMask groundLayer;
     public Transform groundDetectionCastTransform;
-    private float groundedTime;
+    public float groundedTime;
     private float groundedTimer;
 
     [Header("Character Stats")]
@@ -108,7 +108,7 @@ public class CharacterManager : MonoBehaviour
 
     private bool HandleFallingDetection()
     {
-        if (isGrounded || Mathf.Abs(body.velocity.y) < .01f) { return false; }
+        if (isGrounded || (body.velocity.y >= 0f && body.gravityScale > 0f) || (body.velocity.y <= 0f && body.gravityScale < 0f)) { return false; }//Mathf.Abs(body.velocity.y) < .01f) { return false; }
         else
         {
             groundedTimer = groundedTime;

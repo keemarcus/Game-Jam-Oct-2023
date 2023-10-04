@@ -44,7 +44,7 @@ public class InputManager : MonoBehaviour
 
     private void HandleMovementInput(float delta)
     {
-        if (!playerManager.isGrounded && !playerManager.isFalling && !playerManager.isLedgeHanging) { return; }
+        if (playerManager.isInteracting || playerManager.isInDialogue || (!playerManager.isGrounded && !playerManager.isFalling && !playerManager.isLedgeHanging)) { return; }
 
         if (playerManager.isLedgeHanging)
         {
@@ -81,7 +81,7 @@ public class InputManager : MonoBehaviour
 
     private void HandleJumpInput(float delta)
     {
-        if (!playerManager.isGrounded || playerManager.isInteracting || playerManager.isSneaking) { return; }
+        if (!playerManager.isGrounded || playerManager.isInteracting || playerManager.isInDialogue || playerManager.isSneaking) { return; }
 
         if (jumpInput)
         {

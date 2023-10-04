@@ -10,6 +10,7 @@ public class PlayerManager : CharacterManager
     public Vector3 ledgeClimbPositionOffset;
     public bool isSneaking;
     public bool canCombo;
+    public bool isInDialogue;
 
     public Interactable nearestInteractable;
 
@@ -164,6 +165,11 @@ public class PlayerManager : CharacterManager
         if (nearestInteractable == null || Vector2.Distance(this.transform.position, nearestInteractable.transform.position) > nearestInteractable.interactRange) { return; }
 
         // display interact message
-        //Debug.Log(nearestInteractable.interactMessage);
+        Debug.Log(nearestInteractable.interactMessage);
+    }
+
+    public void ToggleInDialogue(bool state)
+    {
+        isInDialogue = state;
     }
 }

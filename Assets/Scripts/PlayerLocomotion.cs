@@ -33,7 +33,7 @@ public class PlayerLocomotion : MonoBehaviour
     {
         if (playerManager.body.bodyType == RigidbodyType2D.Static) { return; }
 
-        if (playerManager.isDead || playerManager.isLedgeHanging)
+        if (playerManager.isDead || playerManager.isLedgeHanging || playerManager.isInteracting || playerManager.isInDialogue)
         {
             playerManager.body.velocity = Vector2.zero;
             return;

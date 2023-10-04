@@ -2,11 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sign : Interactable
+public class Sign : DialogueInteractable
 {
-    public string signText;
-    public override void Interact()
-    {
-        Debug.Log("Reading sign : " + signText);
-    }
+    
 }
