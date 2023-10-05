@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Yarn.Unity;
 
 public class PlayerManager : CharacterManager
 {
@@ -14,12 +15,13 @@ public class PlayerManager : CharacterManager
 
     public Interactable nearestInteractable;
 
-    //public PlayerInventory playerInventory;
+    public PlayerInventory playerInventory;
 
     protected override void Awake()
     {
         inputManager = GetComponent<InputManager>();
         ledgeGrab = GetComponentInChildren<LedgeGrab>();
+        playerInventory = GetComponent<PlayerInventory>();
         isSneaking = false;
         canCombo = false;
         base.Awake();

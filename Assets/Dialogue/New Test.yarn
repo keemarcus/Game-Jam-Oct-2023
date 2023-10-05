@@ -24,3 +24,14 @@ position: 288,-79
 ---
 Goodbye
 ===
+title: LockedDoor
+position: -229,221
+---
+It's locked
+===
+title: FindKey
+position: 22,224
+---
+There's a key here!
+<<add_item Player "Door Key">>
+===
