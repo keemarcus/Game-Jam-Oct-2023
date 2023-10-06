@@ -16,12 +16,14 @@ public class PlayerManager : CharacterManager
     public Interactable nearestInteractable;
 
     public PlayerInventory playerInventory;
+    public InteractPopupUI interactPopupUI;
 
     protected override void Awake()
     {
         inputManager = GetComponent<InputManager>();
         ledgeGrab = GetComponentInChildren<LedgeGrab>();
         playerInventory = GetComponent<PlayerInventory>();
+        interactPopupUI = FindObjectOfType<InteractPopupUI>();
         isSneaking = false;
         canCombo = false;
         base.Awake();
@@ -167,7 +169,8 @@ public class PlayerManager : CharacterManager
         if (nearestInteractable == null || Vector2.Distance(this.transform.position, nearestInteractable.transform.position) > nearestInteractable.interactRange) { return; }
 
         // display interact message
-        Debug.Log(nearestInteractable.interactMessage);
+        interactPopupUI.SetCurrentInteraction(nearestInteractable);
+        //Debug.Log(nearestInteractable.interactMessage);
     }
 
     public void ToggleInDialogue(bool state)

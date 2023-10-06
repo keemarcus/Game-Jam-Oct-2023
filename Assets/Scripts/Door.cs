@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using Yarn.Unity;
 
@@ -23,6 +24,8 @@ public class Door : Interactable
             if (playerManager.playerInventory.inventory.Contains(keyName))
             {
                 doorCollider.enabled = !doorCollider.enabled;
+                if (interactMessage == "Open Door") { interactMessage = "Close Door"; }
+                else if (interactMessage == "Close Door") { interactMessage = "Open Door"; }
             }
             else
             {
@@ -32,6 +35,8 @@ public class Door : Interactable
         else
         {
             doorCollider.enabled = !doorCollider.enabled;
+            if(interactMessage == "Open Door") { interactMessage = "Close Door"; }
+            else if (interactMessage == "Close Door") { interactMessage = "Open Door"; }
         }
     }
 }
