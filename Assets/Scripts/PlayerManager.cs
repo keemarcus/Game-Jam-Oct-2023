@@ -58,18 +58,19 @@ public class PlayerManager : CharacterManager
         {
             if (facingRight)
             {
-                //animator.SetFloat("X", 1f);
+                animator.SetFloat("X", 1f);
             }
             else
             {
-                //animator.SetFloat("X", -1f);
+                animator.SetFloat("X", -1f);
             }
         }
         else
         {
-            //animator.SetBool("Grounded", isGrounded);
+            animator.SetFloat("X", movement);
+            animator.SetBool("Grounded", isGrounded);
             //animator.SetBool("Falling", isFalling);
-            //animator.SetBool("Running", (movement != 0f));
+            animator.SetBool("Running", (movement != 0f));
 
 
             if (movement > .01f)
@@ -93,7 +94,8 @@ public class PlayerManager : CharacterManager
     }
     public void PlayJumpAnimation()
     {
-        //animator.SetTrigger("Jump");
+        animator.SetBool("Grounded", false);
+        animator.SetBool("Jumping", true);
     }
 
     public void SetCanClimb()

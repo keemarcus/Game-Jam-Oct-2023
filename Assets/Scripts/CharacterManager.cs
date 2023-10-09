@@ -6,7 +6,7 @@ public class CharacterManager : MonoBehaviour
 {
     [Header("Character Components")]
     public Rigidbody2D body;
-    //protected Animator animator;
+    protected Animator animator;
 
     [Header("Character State Bools")]
     public bool isDead;
@@ -36,7 +36,7 @@ public class CharacterManager : MonoBehaviour
         facingRight = false;
         isLedgeHanging = false;
         canClimb = false;
-        //animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         body = GetComponent<Rigidbody2D>();
     }
 
@@ -92,6 +92,7 @@ public class CharacterManager : MonoBehaviour
         if (!Physics2D.BoxCast(groundDetectionCastTransform.position + (fallDirection * groundDetectionDistance), new Vector3(this.GetComponent<BoxCollider2D>().size.x - .01f, 0.01f, 0f), 0f, fallDirection, 0.01f, groundLayer)) { return false; }
         else
         {
+            animator.SetBool("Grounded", true);
             // make sure character has the right rigidbody type
             if (!isInteracting && !isLedgeHanging && body.bodyType != RigidbodyType2D.Dynamic) { body.bodyType = RigidbodyType2D.Dynamic; }
 
@@ -112,6 +113,7 @@ public class CharacterManager : MonoBehaviour
         else
         {
             groundedTimer = groundedTime;
+            animator.SetBool("Jumping", false);
             return true;
         }
     }
