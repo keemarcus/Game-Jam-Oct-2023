@@ -67,7 +67,8 @@ public class PlayerManager : CharacterManager
         }
         else
         {
-            animator.SetFloat("X", movement);
+            if(Mathf.Abs(movement) > 0.01f) { animator.SetFloat("X", movement); }
+            
             animator.SetBool("Grounded", isGrounded);
             //animator.SetBool("Falling", isFalling);
             animator.SetBool("Running", (movement != 0f));
