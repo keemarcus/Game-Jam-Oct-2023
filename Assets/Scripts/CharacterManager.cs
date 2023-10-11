@@ -89,7 +89,7 @@ public class CharacterManager : MonoBehaviour
         if (isUpsideDown) { fallDirection = Vector3.up; }
 
         // check to see if character is on the ground
-        if (!Physics2D.BoxCast(groundDetectionCastTransform.position + (fallDirection * groundDetectionDistance), new Vector3(this.GetComponent<BoxCollider2D>().size.x - .01f, 0.01f, 0f), 0f, fallDirection, 0.01f, groundLayer)) { return false; }
+        if (!Physics2D.BoxCast(groundDetectionCastTransform.position + (fallDirection * groundDetectionDistance), new Vector3(this.GetComponent<CapsuleCollider2D>().size.x - .01f, 0.01f, 0f), 0f, fallDirection, 0.01f, groundLayer)) { return false; }
         else
         {
             animator.SetBool("Grounded", true);

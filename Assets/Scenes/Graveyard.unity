@@ -2087,7 +2087,7 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8922854120951315108, guid: 16c833e9fce66f544812e1f6de5f7a29, type: 3}
+    - target: {fileID: 0}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
@@ -3226,27 +3226,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &1540846265 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8922854120951315119, guid: 16c833e9fce66f544812e1f6de5f7a29, type: 3}
-  m_PrefabInstance: {fileID: 647296259}
-  m_PrefabAsset: {fileID: 0}
---- !u!70 &1540846275
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1540846265}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.05, y: 0.25}
-  m_Size: {x: 0.8, y: 1.5}
-  m_Direction: 0
 --- !u!1001 &1917090589
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3298,10 +3277,6 @@ PrefabInstance:
     - target: {fileID: 4154221469949022066, guid: 74fd860eb2a165c4eaf41098cb11dc9a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4154221469949022093, guid: 74fd860eb2a165c4eaf41098cb11dc9a, type: 3}
-      propertyPath: orthographic size
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4154221469949022094, guid: 74fd860eb2a165c4eaf41098cb11dc9a, type: 3}
       propertyPath: m_Name

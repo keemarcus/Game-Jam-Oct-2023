@@ -50,7 +50,7 @@ public class PlayerManager : CharacterManager
 
     public void HandleAnimator(float movement)
     {
-        if (isInteracting) { return; }
+        //if (isInteracting) { return; }
 
         //animator.SetBool("Wall Hang", isLedgeHanging);
 
@@ -72,6 +72,7 @@ public class PlayerManager : CharacterManager
             animator.SetBool("Grounded", isGrounded);
             //animator.SetBool("Falling", isFalling);
             animator.SetBool("Running", (movement != 0f));
+            animator.SetBool("Ghost", isUpsideDown);
 
 
             if (movement > .01f)
