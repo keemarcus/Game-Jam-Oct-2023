@@ -29,6 +29,7 @@ public class InputManager : MonoBehaviour
             inputActions = new PlayerControls();
             inputActions.PlayerMovement.Movement.performed += inputActions => movement = inputActions.ReadValue<Vector2>();
             inputActions.PlayerActions.Jump.performed += i => jumpInput = true;
+            inputActions.PlayerActions.Jump.canceled += i => jumpInput = false;
             inputActions.PlayerActions.Interact.performed += i => interactInput = true;
         }
 
@@ -44,7 +45,7 @@ public class InputManager : MonoBehaviour
 
     private void HandleMovementInput(float delta)
     {
-        if (playerManager.isInteracting || playerManager.isInDialogue || (!playerManager.isGrounded && !playerManager.isFalling && !playerManager.isLedgeHanging)) { return; }
+        if (playerManager.isInteracting || playerManager.isInDialogue || (!playerManager.isGrounded && !playerManager.isFalling && !playerManager.isLedgeHanging && !playerManager.isUpsideDown)) { return; }
 
         if (playerManager.isLedgeHanging)
         {
@@ -81,11 +82,12 @@ public class InputManager : MonoBehaviour
 
     private void HandleJumpInput(float delta)
     {
-        if (!playerManager.isGrounded || playerManager.isInteracting || playerManager.isInDialogue || playerManager.isSneaking) { return; }
+        if (!(playerManager.isGrounded || playerManager.isUpsideDown) || playerManager.isInteracting || playerManager.isInDialogue || playerManager.isSneaking) { return; }
 
         if (jumpInput)
         {
-            playerLocomotion.HandleJump(delta);
+            if (playerManager.isUpsideDown) { playerLocomotion.HandleFloat(delta); }
+            else { playerLocomotion.HandleJump(delta); }
         }
     }
 

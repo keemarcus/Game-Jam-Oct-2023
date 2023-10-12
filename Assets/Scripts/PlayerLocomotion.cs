@@ -54,15 +54,19 @@ public class PlayerLocomotion : MonoBehaviour
 
         playerManager.PlayJumpAnimation();
         float jumpForce;
-        if (playerManager.isUpsideDown)
-        {
-            jumpForce = -1f * Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * -playerManager.body.gravityScale));// * 2f));
-        }
-        else
-        {
-            jumpForce = Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * playerManager.body.gravityScale));// * 2f));
-        }
+        jumpForce = Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * playerManager.body.gravityScale));// * 2f));
         
+        playerManager.body.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+    }
+    public void HandleFloat(float delta)
+    {
+        if (playerManager.isDead || playerManager.isLedgeHanging || playerManager.isInteracting) { return; }
+
+        //playerManager.PlayJumpAnimation();
+        float jumpForce;
+        jumpForce = -.025f * Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * -playerManager.body.gravityScale));// * 2f));   
+
+
         playerManager.body.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 }

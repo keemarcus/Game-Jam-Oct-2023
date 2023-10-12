@@ -121,7 +121,7 @@ public class CharacterManager : MonoBehaviour
     private void OnDrawGizmos()
     {
         // draw ground detection gizmo
-        Gizmos.DrawWireCube(groundDetectionCastTransform.position + (Vector3.down * groundDetectionDistance), new Vector3(this.GetComponent<BoxCollider2D>().size.x - .01f, 0.01f, 0f));
+        Gizmos.DrawWireCube(groundDetectionCastTransform.position + (Vector3.down * groundDetectionDistance), new Vector3(this.GetComponent<CapsuleCollider2D>().size.x - .01f, 0.01f, 0f));
     }
     #endregion
 }

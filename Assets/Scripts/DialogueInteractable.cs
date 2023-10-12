@@ -7,7 +7,6 @@ public class DialogueInteractable : Interactable
 {
     public string dialogueStartNode;
     private DialogueRunner dialogueRunner;
-    private PlayerManager playerManager;
     private void Awake()
     {
         dialogueRunner = FindObjectOfType<DialogueRunner>();

@@ -7,7 +7,7 @@ public class Rift : Interactable
     public Rift riftPair;
     public override void Interact()
     {
-        Debug.Log("Rifting player");
+        //Debug.Log("Rifting player");
 
         // find the player
         PlayerManager player = FindObjectOfType<PlayerManager>();

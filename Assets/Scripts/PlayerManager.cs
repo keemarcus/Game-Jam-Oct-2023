@@ -17,6 +17,7 @@ public class PlayerManager : CharacterManager
 
     public PlayerInventory playerInventory;
     public InteractPopupUI interactPopupUI;
+    private DialogueRunner dialogueRunner;
 
     protected override void Awake()
     {
@@ -24,16 +25,29 @@ public class PlayerManager : CharacterManager
         ledgeGrab = GetComponentInChildren<LedgeGrab>();
         playerInventory = GetComponent<PlayerInventory>();
         interactPopupUI = FindObjectOfType<InteractPopupUI>();
+        dialogueRunner = FindObjectOfType<DialogueRunner>();
         isSneaking = false;
         canCombo = false;
         base.Awake();
     }
     protected override void Update()
     {
+        // check to see if player is in a dialogue
+        if(dialogueRunner.CurrentNodeName != null) {
+            body.bodyType = RigidbodyType2D.Static;
+            isInteracting = true; 
+        }
+        else {
+            body.bodyType = RigidbodyType2D.Dynamic;
+            isInteracting = false; 
+        }
+
         inputManager.TickInput(Time.deltaTime);
 
+
         // update animator
-        HandleAnimator(body.velocity.x);
+        //HandleAnimator(body.velocity.x);
+        HandleAnimator(inputManager.movement.x);
 
         ledgeGrab.SetDirection(facingRight);
 
@@ -44,13 +58,16 @@ public class PlayerManager : CharacterManager
     private void LateUpdate()
     {
         // reset all the input values
-        inputManager.jumpInput = false;
+        if (!isUpsideDown) { inputManager.jumpInput = false; }
         inputManager.interactInput = false;
     }
 
     public void HandleAnimator(float movement)
     {
-        //if (isInteracting) { return; }
+        if (isInteracting) {
+            animator.SetBool("Running", false);
+            return; 
+        }
 
         //animator.SetBool("Wall Hang", isLedgeHanging);
 
@@ -67,7 +84,10 @@ public class PlayerManager : CharacterManager
         }
         else
         {
-            if(Mathf.Abs(movement) > 0.01f) { animator.SetFloat("X", movement); }
+            if (isGrounded || isFalling || isUpsideDown) {
+                if (isUpsideDown) { movement *= -1f; }
+                if (Mathf.Abs(movement) > 0.01f) { animator.SetFloat("X", movement); }
+            }
             
             animator.SetBool("Grounded", isGrounded);
             //animator.SetBool("Falling", isFalling);
